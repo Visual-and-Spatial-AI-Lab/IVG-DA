@@ -58,6 +58,17 @@
     .links a:hover {
       background: #7f291f;
     }
+    .img-placeholder {
+      background: #ffffff;
+      border: 2px dashed #ffffff;
+      padding: 2px;
+      border-radius: 2px;
+      text-align: left;
+      color: #557;
+      font-size: 1.25em;
+      margin: 4px 0 4px 0;
+      min-height: 18px;
+    }
     .teaser-placeholder {
       background: #ffffff;
       border: 2px dashed #ffffff;
@@ -192,8 +203,9 @@
     <ul>
       <li>Interactive video generation with user guidance</li>
       <li>Domain adaptation for handling appearance and structure variations</li>
-      <li>Two-stage pipeline: structure adaptation + appearance adaptation</li>
-      <li>Supports diverse user controls and arbitrary appearance/style references</li>
+      <li>The model generates a video conditioned on user-provided text prompt and bounding-box trajectory</li>
+      <li>Text-to-video diffusion models to allow motion trajectory control without requiring any training</li>
+      <li>Supports a wide range of object scales and motion paths</li>
       <li>Outperforms SOTA methods on standard benchmarks</li>
     </ul>
 
@@ -203,7 +215,11 @@
       <!-- Dataset 1 -->
       <div class="dataset-block">
         <h3>Spider</h3>
-        <a>Prompt: A spider descending on its web from a branch</a>
+        <a><b>Text Prompt</b>: A spider descending on its web from a branch</a><br/>
+        <a><b>Bounding-box trajectory</b>:</a>
+        <div class="img-placeholder">
+        <img src="img/masks/spider.png" alt="motion mask" style="max-width:10%;border-radius:2px;">
+        </div>
         <div class="video-row">
           <div class="video-col">
             <div class="video-title">Peekaboo</div>
@@ -229,7 +245,11 @@
       <!-- Dataset 2 -->
       <div class="dataset-block">
         <h3>Kangaroo</h3>
-        <a>Prompt: A kangaroo hooping down a gentle slope</a>
+        <a><b>Text Prompt</b>: A kangaroo hooping down a gentle slope</a><br/>
+        <a><b>Bounding-box trajectory</b>:</a>
+        <div class="img-placeholder">
+        <img src="img/masks/kangaroo.png" alt="motion mask" style="max-width:10%;border-radius:2px;">
+        </div>
         <div class="video-row">
           <div class="video-col">
             <div class="video-title">Peekaboo</div>
@@ -254,7 +274,11 @@
       <!-- Dataset 3 -->
       <div class="dataset-block">
         <h3>Squirrel</h3>
-        <a>Prompt: A squirrel descending a tree after gathering nuts</a>
+        <a><b>Text Prompt</b>: A squirrel descending a tree after gathering nuts</a><br/>
+        <a><b>Bounding-box trajectory</b>:</a>
+        <div class="img-placeholder">
+        <img src="img/masks/squirrel.png" alt="motion mask" style="max-width:10%;border-radius:2px;">
+        </div>
         <div class="video-row">
           <div class="video-col">
             <div class="video-title">Peekaboo</div>
@@ -279,7 +303,11 @@
       <!-- Dataset 4 -->
       <div class="dataset-block">
         <h3>Swan</h3>
-        <a>Prompt: A Swan floating gracefully on a lake</a>
+        <a><b>Text Prompt</b>: A Swan floating gracefully on a lake</a><br/>
+        <a><b>Bounding-box trajectory</b>:</a>
+        <div class="img-placeholder">
+        <img src="img/masks/spider.png" alt="motion mask" style="max-width:10%;border-radius:2px;">
+        </div>
         <div class="video-row">
           <div class="video-col">
             <div class="video-title">Peekaboo</div>
