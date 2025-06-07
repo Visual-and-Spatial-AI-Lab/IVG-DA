@@ -1,1 +1,328 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Video Generation via Domain Adaptation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { 
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f6f8fa; 
+      color: #20232a; 
+      margin: 0; 
+      padding: 0; 
+    }
+    .container {
+      max-width: 900px;
+      margin: 32px auto;
+      background: #fff;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      border-radius: 12px;
+      padding: 36px 36px 24px 36px;
+    }
+    h1 {
+      font-size: 2.4em;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+    h2 {
+      color: #333c54;
+      border-bottom: 1px solid #ececec;
+      padding-bottom: 4px;
+      margin-top: 36px;
+    }
+     h3 {
+      font-size: 1.18em;
+      color: #3a4259;
+      margin-bottom: 6px;
+      margin-top: 20px;
+      letter-spacing: 0.01em;
+    }
+    .authors {
+      font-size: 1.1em;
+      margin-bottom: 18px;
+      color: #444;
+    }
+    .links a {
+      display: inline-block;
+      background: #942d25a6;
+      color: #fff;
+      text-decoration: none;
+      padding: 7px 18px;
+      border-radius: 7px;
+      margin-right: 14px;
+      margin-bottom: 8px;
+      transition: background 0.2s;
+      font-size: 1em;
+    }
+    .links a:hover {
+      background: #7f291f;
+    }
+    .teaser-placeholder {
+      background: #ffffff;
+      border: 2px dashed #ffffff;
+      padding: 48px;
+      border-radius: 10px;
+      text-align: center;
+      color: #557;
+      font-size: 1.25em;
+      margin: 26px 0 32px 0;
+      min-height: 180px;
+    }
+    .placeholder-videos {
+      background: #eef4fb;
+      border: 2px dashed #aac4e5;
+      padding: 36px;
+      border-radius: 10px;
+      text-align: center;
+      color: #557;
+      font-size: 1.2em;
+      margin: 20px 0 28px 0;
+    }
+    .citation-box {
+      background: #f3f3f3;
+      border-left: 4px solid #5d7baf;
+      padding: 14px 20px;
+      font-family: "Consolas", monospace;
+      font-size: 0.97em;
+      margin-top: 8px;
+      margin-bottom: 18px;
+      overflow-x: auto;
+    }
+    .footer {
+      margin-top: 34px;
+      font-size: 0.98em;
+      color: #888;
+      text-align: center;
+      padding-bottom: 8px;
+    }
+
+    /* Comparison section styles */
+    .dataset-block {
+      margin-bottom: 32px;
+    }
+    .video-row {
+      display: flex;
+      gap: 18px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .video-col {
+      flex: 1 1 250px;
+      min-width: 220px;
+      text-align: center;
+    }
+    .video-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 1.03em;
+      color: #365;
+    }
+    video {
+      background: #ddd;
+      border-radius: 8px;
+      outline: none;
+      margin-bottom: 4px;
+      box-shadow: 0 2px 12px rgba(90,120,180,0.07);
+    }
+    @media (max-width: 850px) {
+      .video-row {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .video-col {
+        min-width: 0;
+      }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 14px; }
+      h1 { font-size: 1.3em; }
+      .teaser-placeholder { padding: 24px; font-size: 1em; min-height: 90px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 style="text-align: center;">Interactive Video Generation via Domain Adaptation</h1>
+    <div class="authors" style="text-align: center;">
+        <span>
+            <a href="" style="color:#662c1e">Ishaan Rawal</a></li><sup>1</sup> &nbsp;&nbsp;
+        </span>
+        <span>
+            <a href="https://suryanshkumar.github.io/" style="color:#662c1e">Suryansh Kumar</a></li><sup>1</sup>
+        </span>
+    </div>
+
+    <div class="authors" style="text-align: center;">
+        <span class="author-block"><sup>1</sup>Texas A&M University, College Station, Texas USA</span><br/>
+        <a>Department of Visualization, Department of ECEN, and Department of CSCE</a><br/>
+           
+    </div>
+
+    <div class="links", style="text-align: center;">
+      <a href="https://arxiv.org/abs/2505.24253" target="_blank">Paper (arXiv)</a>
+      <a href="#" title="Code coming soon">Code (coming soon)</a>
+      <!-- Add more links as needed -->
+    </div>
+
+    <div class="teaser-placeholder">
+      <img src="img/swan-spider-w-abl.png" alt="Teaser image" style="max-width:100%;border-radius:10px;">
+    </div>
+    
+
+    <h2>Abstract</h2>
+    <p style="text-align: justify;">
+        Text-conditioned diffusion models have emerged as powerful tools for high-quality video 
+        generation. However, enabling Interactive Video Generation (IVG), where users control motion 
+        elements such as object trajectory, remains challenging. Recent training-free approaches introduce 
+        attention masking to guide trajectory, but this often degrades perceptual quality. We identify two 
+        key failure modes in these methods, both of which we interpret as domain shift problems, and propose 
+        solutions inspired by domain adaptation. First, we attribute the perceptual degradation to internal 
+        covariate shift induced by attention masking, as pretrained models are not trained to handle masked 
+        attention. To address this, we propose mask normalization, a pre-normalization layer designed to 
+        mitigate this shift via distribution matching. Second, we address initialization gap, where the randomly 
+        sampled initial noise does not align with IVG conditioning, by introducing a temporal intrinsic diffusion
+        prior that enforces spatio-temporal consistency at each denoising step. Extensive qualitative and 
+        quantitative evaluations demonstrate that mask normalization and temporal intrinsic denoising 
+        improve both perceptual quality and trajectory control over the existing state-of-the-art IVG techniques. 
+    </p>
+
+    <h2>Project Overview</h2>
+    <ul>
+      <li>Interactive video generation with user guidance</li>
+      <li>Domain adaptation for handling appearance and structure variations</li>
+      <li>Two-stage pipeline: structure adaptation + appearance adaptation</li>
+      <li>Supports diverse user controls and arbitrary appearance/style references</li>
+      <li>Outperforms SOTA methods on standard benchmarks</li>
+    </ul>
+
+        <!-- Comparison Results Section -->
+    <h2>Comparison Results</h2>
+    <div>
+      <!-- Dataset 1 -->
+      <div class="dataset-block">
+        <h3>Spider</h3>
+        <a>Prompt: A spider descending on its web from a branch</a>
+        <div class="video-row">
+          <div class="video-col">
+            <div class="video-title">Peekaboo</div>
+            <video controls autoplay muted loop width="100%" poster="">
+              <source src="videos/spider/peekaoo.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="video-col">
+            <div class="video-title">Trailblazer</div>
+            <video controls autoplay muted loop width="100%" poster="">
+              <source src="videos/spider/trailblazer.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-col">
+            <div class="video-title">Ours</div>
+            <video controls autoplay muted loop width="100%" poster="">
+              <source src="videos/spider/ours_masknorm+tid.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- Dataset 2 -->
+      <div class="dataset-block">
+        <h3>Kangaroo</h3>
+        <a>Prompt: A kangaroo hooping down a gentle slope</a>
+        <div class="video-row">
+          <div class="video-col">
+            <div class="video-title">Peekaboo</div>
+            <video controls autoplay muted loop width="100%" poster="">
+              <source src="videos/kangaroo/peekaboo.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-col">
+            <div class="video-title">Trailblazer</div>
+            <video controls autoplay muted loop width="100%" poster="">
+              <source src="videos/kangaroo/trailblazer.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-col">
+            <div class="video-title">Ours</div>
+            <video controls autoplay muted loop width="100%" poster="">
+              <source src="videos/kangaroo/ours_masknorm+tid.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- Dataset 3 -->
+      <div class="dataset-block">
+        <h3>Squirrel</h3>
+        <a>Prompt: A squirrel descending a tree after gathering nuts</a>
+        <div class="video-row">
+          <div class="video-col">
+            <div class="video-title">Peekaboo</div>
+            <video controls autoplay muted loop width="100%" poster="">
+              <source src="videos/squirrel/peekaboo.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-col">
+            <div class="video-title">Trailblazer</div>
+            <video controls autoplay muted loop width="100%" poster="">
+              <source src="videos/squirrel/trailblazer.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-col">
+            <div class="video-title">Ours</div>
+            <video controls autoplay muted loop width="100%" poster="">
+              <source src="videos/squirrel/ours_masknorm+tid.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- Dataset 4 -->
+      <div class="dataset-block">
+        <h3>Swan</h3>
+        <a>Prompt: A Swan floating gracefully on a lake</a>
+        <div class="video-row">
+          <div class="video-col">
+            <div class="video-title">Peekaboo</div>
+            <video controls autoplay muted loop width="100%" poster="">
+              <source src="videos/swan/peekaboo.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-col">
+            <div class="video-title">Trailblazer</div>
+            <video controls autoplay muted loop width="100%" poster="">
+              <source src="videos/swan/trailblazer.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-col">
+            <div class="video-title">Ours</div>
+            <video controls autoplay muted loop width="100%" poster="">
+              <source src="videos/swan/ours_masknorm+tid.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Comparison Results Section -->
+
+    <h2>Citation</h2>
+    <div class="citation-box">
+      @article{rawal2025interactive,<br>
+      &nbsp;&nbsp;title={Interactive Video Generation via Domain Adaptation},<br>
+      &nbsp;&nbsp;author={Rawal, Ishaan and Kumar, Suryansh},<br>
+      &nbsp;&nbsp;journal={arXiv preprint arXiv:2505.24253},<br>
+      &nbsp;&nbsp;year={2025}<br>
+      }
+    </div>
+
+    <h2>Contact</h2>
+    <p>
+      For questions or collaborations, please contact <a href="mailto:ishaanrawal@tamu.edu" style="color:#662c1e"> Ishaan Rawal </a>or <a href="mailto:suryansh.kumar@tamu.edu" style="color:#662c1e">Suryansh Kumar</a>.
+    </p>
+
+    <div class="footer">
+      © 2025 Visual and Spatial AI Lab, Project: Interactive Video Generation via Domain Adaptation<br>
+      Department of Visualization, <a href="" target="_blank" style="color:#5d7baf;">College of  Performance, Visualization, and Fine Arts.</a>
+    </div>
+  </div>
+</body>
+</html>
